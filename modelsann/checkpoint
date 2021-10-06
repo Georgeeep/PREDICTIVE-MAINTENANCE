@@ -1,0 +1,2 @@
+model_checkpoint_path: "B=16384_Datalist=FD004"
+all_model_checkpoint_paths: "B=16384_Datalist=FD004"
