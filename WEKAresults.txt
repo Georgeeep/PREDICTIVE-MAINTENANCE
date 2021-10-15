@@ -1,0 +1,1247 @@
+FD0001 LSTM 
+=== Run information ===
+
+Scheme:       weka.classifiers.functions.Dl4jMlpClassifier -S 1 -cache-mode MEMORY -early-stopping "weka.dl4j.earlystopping.EarlyStopping -maxEpochsNoImprovement 10 -valPercentage 0.0" -normalization "Standardize training data" -iterator "weka.dl4j.iterators.instance.DefaultInstanceIterator -bs 1" -iteration-listener "weka.dl4j.listener.EpochListener -eval true -n 5" -layer "weka.dl4j.layers.LSTM -gateActivation \"weka.dl4j.activations.ActivationSigmoid \" -nOut 100 -activation \"weka.dl4j.activations.ActivationReLU \" -name \"LSTM layer 1 1 1\"" -layer "weka.dl4j.layers.LSTM -gateActivation \"weka.dl4j.activations.ActivationSigmoid \" -nOut 300 -activation \"weka.dl4j.activations.ActivationReLU \" -name \"LSTM layer 1 1 2\"" -layer "weka.dl4j.layers.LSTM -gateActivation \"weka.dl4j.activations.ActivationSigmoid \" -nOut 200 -activation \"weka.dl4j.activations.ActivationReLU \" -name \"LSTM layer 2 1\"" -layer "weka.dl4j.layers.LSTM -gateActivation \"weka.dl4j.activations.ActivationSigmoid \" -nOut 100 -activation \"weka.dl4j.activations.ActivationReLU \" -name \"LSTM layer 1 2\"" -layer "weka.dl4j.layers.OutputLayer -lossFn \"weka.dl4j.lossfunctions.LossMSE \" -nOut 1 -activation \"weka.dl4j.activations.ActivationIdentity \" -name \"Output layer 2\"" -logConfig "weka.core.LogConfiguration -append true -dl4jLogLevel WARN -logFile C:\\Users\\User\\wekafiles\\wekaDeeplearning4j.log -nd4jLogLevel INFO -wekaDl4jLogLevel INFO" -config "weka.dl4j.NeuralNetConfiguration -biasInit 0.0 -biasUpdater \"weka.dl4j.updater.Sgd -lr 0.001 -lrSchedule \\\"weka.dl4j.schedules.ConstantSchedule -scheduleType EPOCH\\\"\" -dist \"weka.dl4j.distribution.Disabled \" -dropout \"weka.dl4j.dropout.Disabled \" -gradientNormalization None -gradNormThreshold 1.0 -l1 NaN -l2 NaN -minimize -algorithm STOCHASTIC_GRADIENT_DESCENT -updater \"weka.dl4j.updater.Adam -beta1MeanDecay 0.9 -beta2VarDecay 0.999 -epsilon 1.0E-8 -lr 0.001 -lrSchedule \\\"weka.dl4j.schedules.ConstantSchedule -scheduleType EPOCH\\\"\" -weightInit XAVIER -weightNoise \"weka.dl4j.weightnoise.Disabled \"" -numEpochs 100 -numGPUs 1 -averagingFrequency 10 -prefetchSize 24 -queueSize 0 -zooModel "weka.dl4j.zoo.CustomNet -channelsLast false -pretrained NONE"
+Relation:     normalizedtrain_FD001
+Instances:    20631
+Attributes:   28
+              id
+              cycle
+              setting1
+              setting2
+              setting3
+              s1
+              s2
+              s3
+              s4
+              s5
+              s6
+              s7
+              s8
+              s9
+              s10
+              s11
+              s12
+              s13
+              s14
+              s15
+              s16
+              s17
+              s18
+              s19
+              s20
+              s21
+              RUL
+              cycle_norm
+Test mode:    user supplied test set:  size unknown (reading incrementally)
+
+=== Classifier model (full training set) ===
+
+Network Configuration: 
+NeuralNetConfiguration(weightInit=XAVIER, biasInit=0.0, dist=weka.dl4j.distribution.Disabled@66, l1=NaN, l2=NaN, dropout=Disabled(), updater=Updater(backend=Adam(learningRate=0.001, learningRateSchedule=ConstantSchedule.ConstantScheduleImpl(value=0.001), beta1=0.9, beta2=0.999, epsilon=1.0E-8), learningRateSchedule=ConstantSchedule(), learningRate=0.001), biasUpdater=Updater(backend=Sgd(learningRate=0.001, learningRateSchedule=ConstantSchedule.ConstantScheduleImpl(value=0.001)), learningRateSchedule=ConstantSchedule(), learningRate=0.001), miniBatch=true, seed=0, optimizationAlgo=STOCHASTIC_GRADIENT_DESCENT, useDropConnect=false, weightNoise=Disabled(), minimize=true, gradientNormalization=None, gradientNormalizationThreshold=1.0, inferenceWorkspaceMode=ENABLED, trainingWorkspaceMode=ENABLED)
+Model Summary: 
+
+====================================================================================================================
+VertexName (VertexType)        nIn,nOut   TotalParams   ParamsShape                               Vertex Inputs     
+====================================================================================================================
+input (InputVertex)            -,-        -             -                                         -                 
+LSTM layer 1 1 1 (LSTM)        27,100     51,200        W:{27,400}, RW:{100,400}, b:{1,400}       [input]           
+LSTM layer 1 1 2 (LSTM)        100,300    481,200       W:{100,1200}, RW:{300,1200}, b:{1,1200}   [LSTM layer 1 1 1]
+LSTM layer 2 1 (LSTM)          300,200    400,800       W:{300,800}, RW:{200,800}, b:{1,800}      [LSTM layer 1 1 2]
+LSTM layer 1 2 (LSTM)          200,100    120,400       W:{200,400}, RW:{100,400}, b:{1,400}      [LSTM layer 2 1]  
+Output layer 2 (OutputLayer)   100,1      101           W:{100,1}, b:{1,1}                        [LSTM layer 1 2]  
+--------------------------------------------------------------------------------------------------------------------
+            Total Parameters:  1,053,701
+        Trainable Parameters:  1,053,701
+           Frozen Parameters:  0
+====================================================================================================================
+
+
+Time taken to build model: 19905.65 seconds
+
+=== Evaluation on test set ===
+
+Time taken to test model on supplied test set: 32.05 seconds
+
+=== Summary ===
+
+Correlation coefficient                  0     
+Mean absolute error                     53.1406
+Root mean squared error                 66.6747
+Relative absolute error                 98.1766 %
+Root relative squared error             98.3493 %
+Total Number of Instances            13096     
+
+
+
+
+
+
+
+LSTM FD002
+=== Run information ===
+
+Scheme:       weka.classifiers.functions.Dl4jMlpClassifier -S 1 -cache-mode MEMORY -early-stopping "weka.dl4j.earlystopping.EarlyStopping -maxEpochsNoImprovement 10 -valPercentage 0.0" -normalization "Standardize training data" -iterator "weka.dl4j.iterators.instance.DefaultInstanceIterator -bs 1" -iteration-listener "weka.dl4j.listener.EpochListener -eval true -n 5" -layer "weka.dl4j.layers.LSTM -gateActivation \"weka.dl4j.activations.ActivationSigmoid \" -nOut 100 -activation \"weka.dl4j.activations.ActivationReLU \" -name \"LSTM layer 1 1 1\"" -layer "weka.dl4j.layers.LSTM -gateActivation \"weka.dl4j.activations.ActivationSigmoid \" -nOut 300 -activation \"weka.dl4j.activations.ActivationReLU \" -name \"LSTM layer 1 1 2\"" -layer "weka.dl4j.layers.LSTM -gateActivation \"weka.dl4j.activations.ActivationSigmoid \" -nOut 200 -activation \"weka.dl4j.activations.ActivationReLU \" -name \"LSTM layer 2 1\"" -layer "weka.dl4j.layers.LSTM -gateActivation \"weka.dl4j.activations.ActivationSigmoid \" -nOut 100 -activation \"weka.dl4j.activations.ActivationReLU \" -name \"LSTM layer 1 2\"" -layer "weka.dl4j.layers.OutputLayer -lossFn \"weka.dl4j.lossfunctions.LossMSE \" -nOut 1 -activation \"weka.dl4j.activations.ActivationIdentity \" -name \"Output layer 2\"" -logConfig "weka.core.LogConfiguration -append true -dl4jLogLevel WARN -logFile C:\\Users\\User\\wekafiles\\wekaDeeplearning4j.log -nd4jLogLevel INFO -wekaDl4jLogLevel INFO" -config "weka.dl4j.NeuralNetConfiguration -biasInit 0.0 -biasUpdater \"weka.dl4j.updater.Sgd -lr 0.001 -lrSchedule \\\"weka.dl4j.schedules.ConstantSchedule -scheduleType EPOCH\\\"\" -dist \"weka.dl4j.distribution.Disabled \" -dropout \"weka.dl4j.dropout.Disabled \" -gradientNormalization None -gradNormThreshold 1.0 -l1 NaN -l2 NaN -minimize -algorithm STOCHASTIC_GRADIENT_DESCENT -updater \"weka.dl4j.updater.Adam -beta1MeanDecay 0.9 -beta2VarDecay 0.999 -epsilon 1.0E-8 -lr 0.001 -lrSchedule \\\"weka.dl4j.schedules.ConstantSchedule -scheduleType EPOCH\\\"\" -weightInit XAVIER -weightNoise \"weka.dl4j.weightnoise.Disabled \"" -numEpochs 100 -numGPUs 1 -averagingFrequency 10 -prefetchSize 24 -queueSize 0 -zooModel "weka.dl4j.zoo.CustomNet -channelsLast false -pretrained NONE"
+Relation:     normalizedtrain_FD002
+Instances:    53759
+Attributes:   28
+              id
+              cycle
+              setting1
+              setting2
+              setting3
+              s1
+              s2
+              s3
+              s4
+              s5
+              s6
+              s7
+              s8
+              s9
+              s10
+              s11
+              s12
+              s13
+              s14
+              s15
+              s16
+              s17
+              s18
+              s19
+              s20
+              s21
+              RUL
+              cycle_norm
+Test mode:    user supplied test set:  size unknown (reading incrementally)
+
+=== Classifier model (full training set) ===
+
+Network Configuration: 
+NeuralNetConfiguration(weightInit=XAVIER, biasInit=0.0, dist=weka.dl4j.distribution.Disabled@66, l1=NaN, l2=NaN, dropout=Disabled(), updater=Updater(backend=Adam(learningRate=0.001, learningRateSchedule=ConstantSchedule.ConstantScheduleImpl(value=0.001), beta1=0.9, beta2=0.999, epsilon=1.0E-8), learningRateSchedule=ConstantSchedule(), learningRate=0.001), biasUpdater=Updater(backend=Sgd(learningRate=0.001, learningRateSchedule=ConstantSchedule.ConstantScheduleImpl(value=0.001)), learningRateSchedule=ConstantSchedule(), learningRate=0.001), miniBatch=true, seed=0, optimizationAlgo=STOCHASTIC_GRADIENT_DESCENT, useDropConnect=false, weightNoise=Disabled(), minimize=true, gradientNormalization=None, gradientNormalizationThreshold=1.0, inferenceWorkspaceMode=ENABLED, trainingWorkspaceMode=ENABLED)
+Model Summary: 
+
+====================================================================================================================
+VertexName (VertexType)        nIn,nOut   TotalParams   ParamsShape                               Vertex Inputs     
+====================================================================================================================
+input (InputVertex)            -,-        -             -                                         -                 
+LSTM layer 1 1 1 (LSTM)        27,100     51,200        W:{27,400}, RW:{100,400}, b:{1,400}       [input]           
+LSTM layer 1 1 2 (LSTM)        100,300    481,200       W:{100,1200}, RW:{300,1200}, b:{1,1200}   [LSTM layer 1 1 1]
+LSTM layer 2 1 (LSTM)          300,200    400,800       W:{300,800}, RW:{200,800}, b:{1,800}      [LSTM layer 1 1 2]
+LSTM layer 1 2 (LSTM)          200,100    120,400       W:{200,400}, RW:{100,400}, b:{1,400}      [LSTM layer 2 1]  
+Output layer 2 (OutputLayer)   100,1      101           W:{100,1}, b:{1,1}                        [LSTM layer 1 2]  
+--------------------------------------------------------------------------------------------------------------------
+            Total Parameters:  1,053,701
+        Trainable Parameters:  1,053,701
+           Frozen Parameters:  0
+====================================================================================================================
+
+
+Time taken to build model: 52058.23 seconds
+
+=== Evaluation on test set ===
+
+Time taken to test model on supplied test set: 82.65 seconds
+
+=== Summary ===
+
+Correlation coefficient                  0     
+Mean absolute error                     58.3194
+Root mean squared error                 72.8108
+Relative absolute error                 99.4189 %
+Root relative squared error             99.4329 %
+Total Number of Instances            33991     
+
+
+
+
+
+
+
+lstm fd001 DDROPUT
+=== Run information ===
+
+Scheme:       weka.classifiers.functions.Dl4jMlpClassifier -S 1 -cache-mode MEMORY -early-stopping "weka.dl4j.earlystopping.EarlyStopping -maxEpochsNoImprovement 10 -valPercentage 0.0" -normalization "Standardize training data" -iterator "weka.dl4j.iterators.instance.DefaultInstanceIterator -bs 1" -iteration-listener "weka.dl4j.listener.EpochListener -eval true -n 5" -layer "weka.dl4j.layers.LSTM -gateActivation \"weka.dl4j.activations.ActivationSigmoid \" -nOut 100 -activation \"weka.dl4j.activations.ActivationReLU \" -name \"LSTM layer 1 1 1 1\"" -layer "weka.dl4j.layers.DropoutLayer -dropout \"weka.dl4j.dropout.Dropout -p 0.2 -pSchedule \\\"weka.dl4j.schedules.ConstantSchedule -scheduleType EPOCH\\\"\" -nOut 0 -activation \"weka.dl4j.activations.ActivationReLU \" -name \"Dropout layer 1\"" -layer "weka.dl4j.layers.LSTM -gateActivation \"weka.dl4j.activations.ActivationSigmoid \" -nOut 300 -activation \"weka.dl4j.activations.ActivationReLU \" -name \"LSTM layer 1 1 2\"" -layer "weka.dl4j.layers.DropoutLayer -dropout \"weka.dl4j.dropout.Dropout -p 0.2 -pSchedule \\\"weka.dl4j.schedules.ConstantSchedule -scheduleType EPOCH\\\"\" -nOut 0 -activation \"weka.dl4j.activations.ActivationReLU \" -name \"Dropout layer 2\"" -layer "weka.dl4j.layers.LSTM -gateActivation \"weka.dl4j.activations.ActivationSigmoid \" -nOut 200 -activation \"weka.dl4j.activations.ActivationReLU \" -name \"LSTM layer 2 1\"" -layer "weka.dl4j.layers.DropoutLayer -dropout \"weka.dl4j.dropout.Dropout -p 0.2 -pSchedule \\\"weka.dl4j.schedules.ConstantSchedule -scheduleType EPOCH\\\"\" -nOut 0 -activation \"weka.dl4j.activations.ActivationReLU \" -name \"Dropout layer\"" -layer "weka.dl4j.layers.LSTM -gateActivation \"weka.dl4j.activations.ActivationSigmoid \" -nOut 100 -activation \"weka.dl4j.activations.ActivationReLU \" -name \"LSTM layer 1 2\"" -layer "weka.dl4j.layers.OutputLayer -lossFn \"weka.dl4j.lossfunctions.LossMSE \" -nOut 1 -activation \"weka.dl4j.activations.ActivationIdentity \" -name \"Output layer 2\"" -logConfig "weka.core.LogConfiguration -append true -dl4jLogLevel WARN -logFile C:\\Users\\User\\wekafiles\\wekaDeeplearning4j.log -nd4jLogLevel INFO -wekaDl4jLogLevel INFO" -config "weka.dl4j.NeuralNetConfiguration -biasInit 0.0 -biasUpdater \"weka.dl4j.updater.Sgd -lr 0.001 -lrSchedule \\\"weka.dl4j.schedules.ConstantSchedule -scheduleType EPOCH\\\"\" -dist \"weka.dl4j.distribution.Disabled \" -dropout \"weka.dl4j.dropout.Disabled \" -gradientNormalization None -gradNormThreshold 1.0 -l1 NaN -l2 NaN -minimize -algorithm STOCHASTIC_GRADIENT_DESCENT -updater \"weka.dl4j.updater.Adam -beta1MeanDecay 0.9 -beta2VarDecay 0.999 -epsilon 1.0E-8 -lr 0.001 -lrSchedule \\\"weka.dl4j.schedules.ConstantSchedule -scheduleType EPOCH\\\"\" -weightInit XAVIER -weightNoise \"weka.dl4j.weightnoise.Disabled \"" -numEpochs 100 -numGPUs 1 -averagingFrequency 10 -prefetchSize 24 -queueSize 0 -zooModel "weka.dl4j.zoo.CustomNet -channelsLast false -pretrained NONE"
+Relation:     normalizedtrain_FD001
+Instances:    20631
+Attributes:   28
+              id
+              cycle
+              setting1
+              setting2
+              setting3
+              s1
+              s2
+              s3
+              s4
+              s5
+              s6
+              s7
+              s8
+              s9
+              s10
+              s11
+              s12
+              s13
+              s14
+              s15
+              s16
+              s17
+              s18
+              s19
+              s20
+              s21
+              RUL
+              cycle_norm
+Test mode:    user supplied test set:  size unknown (reading incrementally)
+
+=== Classifier model (full training set) ===
+
+Network Configuration: 
+NeuralNetConfiguration(weightInit=XAVIER, biasInit=0.0, dist=weka.dl4j.distribution.Disabled@66, l1=NaN, l2=NaN, dropout=Disabled(), updater=Updater(backend=Adam(learningRate=0.001, learningRateSchedule=ConstantSchedule.ConstantScheduleImpl(value=0.001), beta1=0.9, beta2=0.999, epsilon=1.0E-8), learningRateSchedule=ConstantSchedule(), learningRate=0.001), biasUpdater=Updater(backend=Sgd(learningRate=0.001, learningRateSchedule=ConstantSchedule.ConstantScheduleImpl(value=0.001)), learningRateSchedule=ConstantSchedule(), learningRate=0.001), miniBatch=true, seed=0, optimizationAlgo=STOCHASTIC_GRADIENT_DESCENT, useDropConnect=false, weightNoise=Disabled(), minimize=true, gradientNormalization=None, gradientNormalizationThreshold=1.0, inferenceWorkspaceMode=ENABLED, trainingWorkspaceMode=ENABLED)
+Model Summary: 
+
+========================================================================================================================
+VertexName (VertexType)          nIn,nOut   TotalParams   ParamsShape                               Vertex Inputs       
+========================================================================================================================
+input (InputVertex)              -,-        -             -                                         -                   
+LSTM layer 1 1 1 1 (LSTM)        27,100     51,200        W:{27,400}, RW:{100,400}, b:{1,400}       [input]             
+Dropout layer 1 (DropoutLayer)   -,-        0             -                                         [LSTM layer 1 1 1 1]
+LSTM layer 1 1 2 (LSTM)          100,300    481,200       W:{100,1200}, RW:{300,1200}, b:{1,1200}   [Dropout layer 1]   
+Dropout layer 2 (DropoutLayer)   -,-        0             -                                         [LSTM layer 1 1 2]  
+LSTM layer 2 1 (LSTM)            300,200    400,800       W:{300,800}, RW:{200,800}, b:{1,800}      [Dropout layer 2]   
+Dropout layer (DropoutLayer)     -,-        0             -                                         [LSTM layer 2 1]    
+LSTM layer 1 2 (LSTM)            200,100    120,400       W:{200,400}, RW:{100,400}, b:{1,400}      [Dropout layer]     
+Output layer 2 (OutputLayer)     100,1      101           W:{100,1}, b:{1,1}                        [LSTM layer 1 2]    
+------------------------------------------------------------------------------------------------------------------------
+            Total Parameters:  1,053,701
+        Trainable Parameters:  1,053,701
+           Frozen Parameters:  0
+========================================================================================================================
+
+
+Time taken to build model: 21326.29 seconds
+
+=== Evaluation on test set ===
+
+Time taken to test model on supplied test set: 31.95 seconds
+
+=== Summary ===
+
+Correlation coefficient                  0.377 
+Mean absolute error                     35.8565
+Root mean squared error                 81.7786
+Relative absolute error                 66.2446 %
+Root relative squared error            120.6285 %
+Total Number of Instances            13096     
+
+FD002 dropout LSTM
+=== Run information ===
+
+Scheme:       weka.classifiers.functions.Dl4jMlpClassifier -S 1 -cache-mode MEMORY -early-stopping "weka.dl4j.earlystopping.EarlyStopping -maxEpochsNoImprovement 10 -valPercentage 0.0" -normalization "Standardize training data" -iterator "weka.dl4j.iterators.instance.DefaultInstanceIterator -bs 1" -iteration-listener "weka.dl4j.listener.EpochListener -eval true -n 5" -layer "weka.dl4j.layers.LSTM -gateActivation \"weka.dl4j.activations.ActivationSigmoid \" -nOut 100 -activation \"weka.dl4j.activations.ActivationReLU \" -name \"LSTM layer 1 1 1 1\"" -layer "weka.dl4j.layers.DropoutLayer -dropout \"weka.dl4j.dropout.Dropout -p 0.2 -pSchedule \\\"weka.dl4j.schedules.ConstantSchedule -scheduleType EPOCH\\\"\" -nOut 0 -activation \"weka.dl4j.activations.ActivationReLU \" -name \"Dropout layer 1\"" -layer "weka.dl4j.layers.LSTM -gateActivation \"weka.dl4j.activations.ActivationSigmoid \" -nOut 300 -activation \"weka.dl4j.activations.ActivationReLU \" -name \"LSTM layer 1 1 2\"" -layer "weka.dl4j.layers.DropoutLayer -dropout \"weka.dl4j.dropout.Dropout -p 0.2 -pSchedule \\\"weka.dl4j.schedules.ConstantSchedule -scheduleType EPOCH\\\"\" -nOut 0 -activation \"weka.dl4j.activations.ActivationReLU \" -name \"Dropout layer 2\"" -layer "weka.dl4j.layers.LSTM -gateActivation \"weka.dl4j.activations.ActivationSigmoid \" -nOut 200 -activation \"weka.dl4j.activations.ActivationReLU \" -name \"LSTM layer 2 1\"" -layer "weka.dl4j.layers.DropoutLayer -dropout \"weka.dl4j.dropout.Dropout -p 0.2 -pSchedule \\\"weka.dl4j.schedules.ConstantSchedule -scheduleType EPOCH\\\"\" -nOut 0 -activation \"weka.dl4j.activations.ActivationReLU \" -name \"Dropout layer\"" -layer "weka.dl4j.layers.LSTM -gateActivation \"weka.dl4j.activations.ActivationSigmoid \" -nOut 100 -activation \"weka.dl4j.activations.ActivationReLU \" -name \"LSTM layer 1 2\"" -layer "weka.dl4j.layers.OutputLayer -lossFn \"weka.dl4j.lossfunctions.LossMSE \" -nOut 1 -activation \"weka.dl4j.activations.ActivationIdentity \" -name \"Output layer 2\"" -logConfig "weka.core.LogConfiguration -append true -dl4jLogLevel WARN -logFile C:\\Users\\User\\wekafiles\\wekaDeeplearning4j.log -nd4jLogLevel INFO -wekaDl4jLogLevel INFO" -config "weka.dl4j.NeuralNetConfiguration -biasInit 0.0 -biasUpdater \"weka.dl4j.updater.Sgd -lr 0.001 -lrSchedule \\\"weka.dl4j.schedules.ConstantSchedule -scheduleType EPOCH\\\"\" -dist \"weka.dl4j.distribution.Disabled \" -dropout \"weka.dl4j.dropout.Disabled \" -gradientNormalization None -gradNormThreshold 1.0 -l1 NaN -l2 NaN -minimize -algorithm STOCHASTIC_GRADIENT_DESCENT -updater \"weka.dl4j.updater.Adam -beta1MeanDecay 0.9 -beta2VarDecay 0.999 -epsilon 1.0E-8 -lr 0.001 -lrSchedule \\\"weka.dl4j.schedules.ConstantSchedule -scheduleType EPOCH\\\"\" -weightInit XAVIER -weightNoise \"weka.dl4j.weightnoise.Disabled \"" -numEpochs 100 -numGPUs 1 -averagingFrequency 10 -prefetchSize 24 -queueSize 0 -zooModel "weka.dl4j.zoo.CustomNet -channelsLast false -pretrained NONE"
+Relation:     normalizedtrain_FD002
+Instances:    53759
+Attributes:   28
+              id
+              cycle
+              setting1
+              setting2
+              setting3
+              s1
+              s2
+              s3
+              s4
+              s5
+              s6
+              s7
+              s8
+              s9
+              s10
+              s11
+              s12
+              s13
+              s14
+              s15
+              s16
+              s17
+              s18
+              s19
+              s20
+              s21
+              RUL
+              cycle_norm
+Test mode:    user supplied test set:  size unknown (reading incrementally)
+
+=== Classifier model (full training set) ===
+
+Network Configuration: 
+NeuralNetConfiguration(weightInit=XAVIER, biasInit=0.0, dist=weka.dl4j.distribution.Disabled@66, l1=NaN, l2=NaN, dropout=Disabled(), updater=Updater(backend=Adam(learningRate=0.001, learningRateSchedule=ConstantSchedule.ConstantScheduleImpl(value=0.001), beta1=0.9, beta2=0.999, epsilon=1.0E-8), learningRateSchedule=ConstantSchedule(), learningRate=0.001), biasUpdater=Updater(backend=Sgd(learningRate=0.001, learningRateSchedule=ConstantSchedule.ConstantScheduleImpl(value=0.001)), learningRateSchedule=ConstantSchedule(), learningRate=0.001), miniBatch=true, seed=0, optimizationAlgo=STOCHASTIC_GRADIENT_DESCENT, useDropConnect=false, weightNoise=Disabled(), minimize=true, gradientNormalization=None, gradientNormalizationThreshold=1.0, inferenceWorkspaceMode=ENABLED, trainingWorkspaceMode=ENABLED)
+Model Summary: 
+
+========================================================================================================================
+VertexName (VertexType)          nIn,nOut   TotalParams   ParamsShape                               Vertex Inputs       
+========================================================================================================================
+input (InputVertex)              -,-        -             -                                         -                   
+LSTM layer 1 1 1 1 (LSTM)        27,100     51,200        W:{27,400}, RW:{100,400}, b:{1,400}       [input]             
+Dropout layer 1 (DropoutLayer)   -,-        0             -                                         [LSTM layer 1 1 1 1]
+LSTM layer 1 1 2 (LSTM)          100,300    481,200       W:{100,1200}, RW:{300,1200}, b:{1,1200}   [Dropout layer 1]   
+Dropout layer 2 (DropoutLayer)   -,-        0             -                                         [LSTM layer 1 1 2]  
+LSTM layer 2 1 (LSTM)            300,200    400,800       W:{300,800}, RW:{200,800}, b:{1,800}      [Dropout layer 2]   
+Dropout layer (DropoutLayer)     -,-        0             -                                         [LSTM layer 2 1]    
+LSTM layer 1 2 (LSTM)            200,100    120,400       W:{200,400}, RW:{100,400}, b:{1,400}      [Dropout layer]     
+Output layer 2 (OutputLayer)     100,1      101           W:{100,1}, b:{1,1}                        [LSTM layer 1 2]    
+------------------------------------------------------------------------------------------------------------------------
+            Total Parameters:  1,053,701
+        Trainable Parameters:  1,053,701
+           Frozen Parameters:  0
+========================================================================================================================
+
+
+Time taken to build model: 54085.08 seconds
+
+=== Evaluation on test set ===
+
+Time taken to test model on supplied test set: 91.4 seconds
+
+=== Summary ===
+
+Correlation coefficient                  0.7133
+Mean absolute error                     35.415 
+Root mean squared error                 45.1502
+Relative absolute error                 60.3731 %
+Root relative squared error             61.6586 %
+Total Number of Instances            33991     
+
+FD003 LSTM dropout
+=== Run information ===
+
+Scheme:       weka.classifiers.functions.Dl4jMlpClassifier -S 1 -cache-mode MEMORY -early-stopping "weka.dl4j.earlystopping.EarlyStopping -maxEpochsNoImprovement 8 -valPercentage 0.0" -normalization "Standardize training data" -iterator "weka.dl4j.iterators.instance.DefaultInstanceIterator -bs 1" -iteration-listener "weka.dl4j.listener.EpochListener -eval true -n 5" -layer "weka.dl4j.layers.LSTM -gateActivation \"weka.dl4j.activations.ActivationSigmoid \" -nOut 100 -activation \"weka.dl4j.activations.ActivationReLU \" -name \"LSTM layer 1 1 1 1\"" -layer "weka.dl4j.layers.DropoutLayer -dropout \"weka.dl4j.dropout.Dropout -p 0.2 -pSchedule \\\"weka.dl4j.schedules.ConstantSchedule -scheduleType EPOCH\\\"\" -nOut 0 -activation \"weka.dl4j.activations.ActivationReLU \" -name \"Dropout layer 1\"" -layer "weka.dl4j.layers.LSTM -gateActivation \"weka.dl4j.activations.ActivationSigmoid \" -nOut 300 -activation \"weka.dl4j.activations.ActivationReLU \" -name \"LSTM layer 1 1 2\"" -layer "weka.dl4j.layers.DropoutLayer -dropout \"weka.dl4j.dropout.Dropout -p 0.2 -pSchedule \\\"weka.dl4j.schedules.ConstantSchedule -scheduleType EPOCH\\\"\" -nOut 0 -activation \"weka.dl4j.activations.ActivationReLU \" -name \"Dropout layer 2\"" -layer "weka.dl4j.layers.LSTM -gateActivation \"weka.dl4j.activations.ActivationSigmoid \" -nOut 200 -activation \"weka.dl4j.activations.ActivationReLU \" -name \"LSTM layer 2 1\"" -layer "weka.dl4j.layers.DropoutLayer -dropout \"weka.dl4j.dropout.Dropout -p 0.2 -pSchedule \\\"weka.dl4j.schedules.ConstantSchedule -scheduleType EPOCH\\\"\" -nOut 0 -activation \"weka.dl4j.activations.ActivationReLU \" -name \"Dropout layer\"" -layer "weka.dl4j.layers.LSTM -gateActivation \"weka.dl4j.activations.ActivationSigmoid \" -nOut 100 -activation \"weka.dl4j.activations.ActivationReLU \" -name \"LSTM layer 1 2\"" -layer "weka.dl4j.layers.OutputLayer -lossFn \"weka.dl4j.lossfunctions.LossMSE \" -nOut 1 -activation \"weka.dl4j.activations.ActivationIdentity \" -name \"Output layer 2\"" -logConfig "weka.core.LogConfiguration -append true -dl4jLogLevel WARN -logFile C:\\Users\\User\\wekafiles\\wekaDeeplearning4j.log -nd4jLogLevel INFO -wekaDl4jLogLevel INFO" -config "weka.dl4j.NeuralNetConfiguration -biasInit 0.0 -biasUpdater \"weka.dl4j.updater.Sgd -lr 0.001 -lrSchedule \\\"weka.dl4j.schedules.ConstantSchedule -scheduleType EPOCH\\\"\" -dist \"weka.dl4j.distribution.Disabled \" -dropout \"weka.dl4j.dropout.Disabled \" -gradientNormalization None -gradNormThreshold 1.0 -l1 NaN -l2 NaN -minimize -algorithm STOCHASTIC_GRADIENT_DESCENT -updater \"weka.dl4j.updater.Adam -beta1MeanDecay 0.9 -beta2VarDecay 0.999 -epsilon 1.0E-8 -lr 0.001 -lrSchedule \\\"weka.dl4j.schedules.ConstantSchedule -scheduleType EPOCH\\\"\" -weightInit XAVIER -weightNoise \"weka.dl4j.weightnoise.Disabled \"" -numEpochs 100 -numGPUs 1 -averagingFrequency 10 -prefetchSize 24 -queueSize 0 -zooModel "weka.dl4j.zoo.CustomNet -channelsLast false -pretrained NONE"
+Relation:     normalizedtrain_FD003
+Instances:    24720
+Attributes:   28
+              id
+              cycle
+              setting1
+              setting2
+              setting3
+              s1
+              s2
+              s3
+              s4
+              s5
+              s6
+              s7
+              s8
+              s9
+              s10
+              s11
+              s12
+              s13
+              s14
+              s15
+              s16
+              s17
+              s18
+              s19
+              s20
+              s21
+              RUL
+              cycle_norm
+Test mode:    user supplied test set:  size unknown (reading incrementally)
+
+=== Classifier model (full training set) ===
+
+Network Configuration: 
+NeuralNetConfiguration(weightInit=XAVIER, biasInit=0.0, dist=weka.dl4j.distribution.Disabled@66, l1=NaN, l2=NaN, dropout=Disabled(), updater=Updater(backend=Adam(learningRate=0.001, learningRateSchedule=ConstantSchedule.ConstantScheduleImpl(value=0.001), beta1=0.9, beta2=0.999, epsilon=1.0E-8), learningRateSchedule=ConstantSchedule(), learningRate=0.001), biasUpdater=Updater(backend=Sgd(learningRate=0.001, learningRateSchedule=ConstantSchedule.ConstantScheduleImpl(value=0.001)), learningRateSchedule=ConstantSchedule(), learningRate=0.001), miniBatch=true, seed=0, optimizationAlgo=STOCHASTIC_GRADIENT_DESCENT, useDropConnect=false, weightNoise=Disabled(), minimize=true, gradientNormalization=None, gradientNormalizationThreshold=1.0, inferenceWorkspaceMode=ENABLED, trainingWorkspaceMode=ENABLED)
+Model Summary: 
+
+========================================================================================================================
+VertexName (VertexType)          nIn,nOut   TotalParams   ParamsShape                               Vertex Inputs       
+========================================================================================================================
+input (InputVertex)              -,-        -             -                                         -                   
+LSTM layer 1 1 1 1 (LSTM)        27,100     51,200        W:{27,400}, RW:{100,400}, b:{1,400}       [input]             
+Dropout layer 1 (DropoutLayer)   -,-        0             -                                         [LSTM layer 1 1 1 1]
+LSTM layer 1 1 2 (LSTM)          100,300    481,200       W:{100,1200}, RW:{300,1200}, b:{1,1200}   [Dropout layer 1]   
+Dropout layer 2 (DropoutLayer)   -,-        0             -                                         [LSTM layer 1 1 2]  
+LSTM layer 2 1 (LSTM)            300,200    400,800       W:{300,800}, RW:{200,800}, b:{1,800}      [Dropout layer 2]   
+Dropout layer (DropoutLayer)     -,-        0             -                                         [LSTM layer 2 1]    
+LSTM layer 1 2 (LSTM)            200,100    120,400       W:{200,400}, RW:{100,400}, b:{1,400}      [Dropout layer]     
+Output layer 2 (OutputLayer)     100,1      101           W:{100,1}, b:{1,1}                        [LSTM layer 1 2]    
+------------------------------------------------------------------------------------------------------------------------
+            Total Parameters:  1,053,701
+        Trainable Parameters:  1,053,701
+           Frozen Parameters:  0
+========================================================================================================================
+
+
+Time taken to build model: 25952.27 seconds
+
+=== Evaluation on test set ===
+
+Time taken to test model on supplied test set: 45.3 seconds
+
+=== Summary ===
+
+Correlation coefficient                  0     
+Mean absolute error                     65.8331
+Root mean squared error                 89.4246
+Relative absolute error                 99.4051 %
+Root relative squared error             99.3298 %
+Total Number of Instances            16596     
+
+
+FD004
+=== Run information ===
+
+Scheme:       weka.classifiers.functions.Dl4jMlpClassifier -S 1 -cache-mode MEMORY -early-stopping "weka.dl4j.earlystopping.EarlyStopping -maxEpochsNoImprovement 8 -valPercentage 0.0" -normalization "Standardize training data" -iterator "weka.dl4j.iterators.instance.DefaultInstanceIterator -bs 1" -iteration-listener "weka.dl4j.listener.EpochListener -eval true -n 5" -layer "weka.dl4j.layers.LSTM -gateActivation \"weka.dl4j.activations.ActivationSigmoid \" -nOut 100 -activation \"weka.dl4j.activations.ActivationReLU \" -name \"LSTM layer 1 1 1 1\"" -layer "weka.dl4j.layers.DropoutLayer -dropout \"weka.dl4j.dropout.Dropout -p 0.2 -pSchedule \\\"weka.dl4j.schedules.ConstantSchedule -scheduleType EPOCH\\\"\" -nOut 0 -activation \"weka.dl4j.activations.ActivationReLU \" -name \"Dropout layer 1\"" -layer "weka.dl4j.layers.LSTM -gateActivation \"weka.dl4j.activations.ActivationSigmoid \" -nOut 300 -activation \"weka.dl4j.activations.ActivationReLU \" -name \"LSTM layer 1 1 2\"" -layer "weka.dl4j.layers.DropoutLayer -dropout \"weka.dl4j.dropout.Dropout -p 0.2 -pSchedule \\\"weka.dl4j.schedules.ConstantSchedule -scheduleType EPOCH\\\"\" -nOut 0 -activation \"weka.dl4j.activations.ActivationReLU \" -name \"Dropout layer 2\"" -layer "weka.dl4j.layers.LSTM -gateActivation \"weka.dl4j.activations.ActivationSigmoid \" -nOut 200 -activation \"weka.dl4j.activations.ActivationReLU \" -name \"LSTM layer 2 1\"" -layer "weka.dl4j.layers.DropoutLayer -dropout \"weka.dl4j.dropout.Dropout -p 0.2 -pSchedule \\\"weka.dl4j.schedules.ConstantSchedule -scheduleType EPOCH\\\"\" -nOut 0 -activation \"weka.dl4j.activations.ActivationReLU \" -name \"Dropout layer\"" -layer "weka.dl4j.layers.LSTM -gateActivation \"weka.dl4j.activations.ActivationSigmoid \" -nOut 100 -activation \"weka.dl4j.activations.ActivationReLU \" -name \"LSTM layer 1 2\"" -layer "weka.dl4j.layers.OutputLayer -lossFn \"weka.dl4j.lossfunctions.LossMSE \" -nOut 1 -activation \"weka.dl4j.activations.ActivationIdentity \" -name \"Output layer 2\"" -logConfig "weka.core.LogConfiguration -append true -dl4jLogLevel WARN -logFile C:\\Users\\User\\wekafiles\\wekaDeeplearning4j.log -nd4jLogLevel INFO -wekaDl4jLogLevel INFO" -config "weka.dl4j.NeuralNetConfiguration -biasInit 0.0 -biasUpdater \"weka.dl4j.updater.Sgd -lr 0.001 -lrSchedule \\\"weka.dl4j.schedules.ConstantSchedule -scheduleType EPOCH\\\"\" -dist \"weka.dl4j.distribution.Disabled \" -dropout \"weka.dl4j.dropout.Disabled \" -gradientNormalization None -gradNormThreshold 1.0 -l1 NaN -l2 NaN -minimize -algorithm STOCHASTIC_GRADIENT_DESCENT -updater \"weka.dl4j.updater.Adam -beta1MeanDecay 0.9 -beta2VarDecay 0.999 -epsilon 1.0E-8 -lr 0.001 -lrSchedule \\\"weka.dl4j.schedules.ConstantSchedule -scheduleType EPOCH\\\"\" -weightInit XAVIER -weightNoise \"weka.dl4j.weightnoise.Disabled \"" -numEpochs 100 -numGPUs 1 -averagingFrequency 10 -prefetchSize 24 -queueSize 0 -zooModel "weka.dl4j.zoo.CustomNet -channelsLast false -pretrained NONE"
+Relation:     normalizedtrain_FD004
+Instances:    61249
+Attributes:   28
+              id
+              cycle
+              setting1
+              setting2
+              setting3
+              s1
+              s2
+              s3
+              s4
+              s5
+              s6
+              s7
+              s8
+              s9
+              s10
+              s11
+              s12
+              s13
+              s14
+              s15
+              s16
+              s17
+              s18
+              s19
+              s20
+              s21
+              RUL
+              cycle_norm
+Test mode:    user supplied test set:  size unknown (reading incrementally)
+
+=== Classifier model (full training set) ===
+
+Network Configuration: 
+NeuralNetConfiguration(weightInit=XAVIER, biasInit=0.0, dist=weka.dl4j.distribution.Disabled@66, l1=NaN, l2=NaN, dropout=Disabled(), updater=Updater(backend=Adam(learningRate=0.001, learningRateSchedule=ConstantSchedule.ConstantScheduleImpl(value=0.001), beta1=0.9, beta2=0.999, epsilon=1.0E-8), learningRateSchedule=ConstantSchedule(), learningRate=0.001), biasUpdater=Updater(backend=Sgd(learningRate=0.001, learningRateSchedule=ConstantSchedule.ConstantScheduleImpl(value=0.001)), learningRateSchedule=ConstantSchedule(), learningRate=0.001), miniBatch=true, seed=0, optimizationAlgo=STOCHASTIC_GRADIENT_DESCENT, useDropConnect=false, weightNoise=Disabled(), minimize=true, gradientNormalization=None, gradientNormalizationThreshold=1.0, inferenceWorkspaceMode=ENABLED, trainingWorkspaceMode=ENABLED)
+Model Summary: 
+
+========================================================================================================================
+VertexName (VertexType)          nIn,nOut   TotalParams   ParamsShape                               Vertex Inputs       
+========================================================================================================================
+input (InputVertex)              -,-        -             -                                         -                   
+LSTM layer 1 1 1 1 (LSTM)        27,100     51,200        W:{27,400}, RW:{100,400}, b:{1,400}       [input]             
+Dropout layer 1 (DropoutLayer)   -,-        0             -                                         [LSTM layer 1 1 1 1]
+LSTM layer 1 1 2 (LSTM)          100,300    481,200       W:{100,1200}, RW:{300,1200}, b:{1,1200}   [Dropout layer 1]   
+Dropout layer 2 (DropoutLayer)   -,-        0             -                                         [LSTM layer 1 1 2]  
+LSTM layer 2 1 (LSTM)            300,200    400,800       W:{300,800}, RW:{200,800}, b:{1,800}      [Dropout layer 2]   
+Dropout layer (DropoutLayer)     -,-        0             -                                         [LSTM layer 2 1]    
+LSTM layer 1 2 (LSTM)            200,100    120,400       W:{200,400}, RW:{100,400}, b:{1,400}      [Dropout layer]     
+Output layer 2 (OutputLayer)     100,1      101           W:{100,1}, b:{1,1}                        [LSTM layer 1 2]    
+------------------------------------------------------------------------------------------------------------------------
+            Total Parameters:  1,053,701
+        Trainable Parameters:  1,053,701
+           Frozen Parameters:  0
+========================================================================================================================
+
+
+Time taken to build model: 61986.89 seconds
+
+=== Evaluation on test set ===
+
+Time taken to test model on supplied test set: 102.64 seconds
+
+=== Summary ===
+
+Correlation coefficient                  0     
+Mean absolute error                     77.0433
+Root mean squared error                102.3293
+Relative absolute error                 98.2398 %
+Root relative squared error             98.2134 %
+Total Number of Instances            41214     
+
+
+
+FD0001 without cycle
+=== Run information ===
+
+Scheme:       weka.classifiers.misc.InputMappedClassifier -I -trim -W weka.classifiers.functions.Dl4jMlpClassifier -- -S 1 -cache-mode MEMORY -early-stopping "weka.dl4j.earlystopping.EarlyStopping -maxEpochsNoImprovement 8 -valPercentage 0.0" -normalization "Standardize training data" -iterator "weka.dl4j.iterators.instance.DefaultInstanceIterator -bs 1" -iteration-listener "weka.dl4j.listener.EpochListener -eval true -n 5" -layer "weka.dl4j.layers.LSTM -gateActivation \"weka.dl4j.activations.ActivationSigmoid \" -nOut 100 -activation \"weka.dl4j.activations.ActivationReLU \" -name \"LSTM layer 1 1 1 1\"" -layer "weka.dl4j.layers.DropoutLayer -dropout \"weka.dl4j.dropout.Dropout -p 0.2 -pSchedule \\\"weka.dl4j.schedules.ConstantSchedule -scheduleType EPOCH\\\"\" -nOut 0 -activation \"weka.dl4j.activations.ActivationReLU \" -name \"Dropout layer 1\"" -layer "weka.dl4j.layers.LSTM -gateActivation \"weka.dl4j.activations.ActivationSigmoid \" -nOut 300 -activation \"weka.dl4j.activations.ActivationReLU \" -name \"LSTM layer 1 1 2\"" -layer "weka.dl4j.layers.DropoutLayer -dropout \"weka.dl4j.dropout.Dropout -p 0.2 -pSchedule \\\"weka.dl4j.schedules.ConstantSchedule -scheduleType EPOCH\\\"\" -nOut 0 -activation \"weka.dl4j.activations.ActivationReLU \" -name \"Dropout layer 2\"" -layer "weka.dl4j.layers.LSTM -gateActivation \"weka.dl4j.activations.ActivationSigmoid \" -nOut 200 -activation \"weka.dl4j.activations.ActivationReLU \" -name \"LSTM layer 2 1\"" -layer "weka.dl4j.layers.DropoutLayer -dropout \"weka.dl4j.dropout.Dropout -p 0.2 -pSchedule \\\"weka.dl4j.schedules.ConstantSchedule -scheduleType EPOCH\\\"\" -nOut 0 -activation \"weka.dl4j.activations.ActivationReLU \" -name \"Dropout layer\"" -layer "weka.dl4j.layers.LSTM -gateActivation \"weka.dl4j.activations.ActivationSigmoid \" -nOut 100 -activation \"weka.dl4j.activations.ActivationReLU \" -name \"LSTM layer 1 2\"" -layer "weka.dl4j.layers.OutputLayer -lossFn \"weka.dl4j.lossfunctions.LossMSE \" -nOut 1 -activation \"weka.dl4j.activations.ActivationIdentity \" -name \"Output layer 2\"" -logConfig "weka.core.LogConfiguration -append true -dl4jLogLevel WARN -logFile C:\\Users\\User\\wekafiles\\wekaDeeplearning4j.log -nd4jLogLevel INFO -wekaDl4jLogLevel INFO" -config "weka.dl4j.NeuralNetConfiguration -biasInit 0.0 -biasUpdater \"weka.dl4j.updater.Sgd -lr 0.001 -lrSchedule \\\"weka.dl4j.schedules.ConstantSchedule -scheduleType EPOCH\\\"\" -dist \"weka.dl4j.distribution.Disabled \" -dropout \"weka.dl4j.dropout.Disabled \" -gradientNormalization None -gradNormThreshold 1.0 -l1 NaN -l2 NaN -minimize -algorithm STOCHASTIC_GRADIENT_DESCENT -updater \"weka.dl4j.updater.Adam -beta1MeanDecay 0.9 -beta2VarDecay 0.999 -epsilon 1.0E-8 -lr 0.001 -lrSchedule \\\"weka.dl4j.schedules.ConstantSchedule -scheduleType EPOCH\\\"\" -weightInit XAVIER -weightNoise \"weka.dl4j.weightnoise.Disabled \"" -numEpochs 100 -numGPUs 1 -averagingFrequency 10 -prefetchSize 24 -queueSize 0 -zooModel "weka.dl4j.zoo.CustomNet -channelsLast false -pretrained NONE"
+Relation:     normalizedtrain_FD001-weka.filters.unsupervised.attribute.Remove-R2
+Instances:    20631
+Attributes:   27
+              id
+              setting1
+              setting2
+              setting3
+              s1
+              s2
+              s3
+              s4
+              s5
+              s6
+              s7
+              s8
+              s9
+              s10
+              s11
+              s12
+              s13
+              s14
+              s15
+              s16
+              s17
+              s18
+              s19
+              s20
+              s21
+              RUL
+              cycle_norm
+Test mode:    user supplied test set:  size unknown (reading incrementally)
+
+=== Classifier model (full training set) ===
+
+InputMappedClassifier:
+
+Network Configuration: 
+NeuralNetConfiguration(weightInit=XAVIER, biasInit=0.0, dist=weka.dl4j.distribution.Disabled@66, l1=NaN, l2=NaN, dropout=Disabled(), updater=Updater(backend=Adam(learningRate=0.001, learningRateSchedule=ConstantSchedule.ConstantScheduleImpl(value=0.001), beta1=0.9, beta2=0.999, epsilon=1.0E-8), learningRateSchedule=ConstantSchedule(), learningRate=0.001), biasUpdater=Updater(backend=Sgd(learningRate=0.001, learningRateSchedule=ConstantSchedule.ConstantScheduleImpl(value=0.001)), learningRateSchedule=ConstantSchedule(), learningRate=0.001), miniBatch=true, seed=0, optimizationAlgo=STOCHASTIC_GRADIENT_DESCENT, useDropConnect=false, weightNoise=Disabled(), minimize=true, gradientNormalization=None, gradientNormalizationThreshold=1.0, inferenceWorkspaceMode=ENABLED, trainingWorkspaceMode=ENABLED)
+Model Summary: 
+
+========================================================================================================================
+VertexName (VertexType)          nIn,nOut   TotalParams   ParamsShape                               Vertex Inputs       
+========================================================================================================================
+input (InputVertex)              -,-        -             -                                         -                   
+LSTM layer 1 1 1 1 (LSTM)        26,100     50,800        W:{26,400}, RW:{100,400}, b:{1,400}       [input]             
+Dropout layer 1 (DropoutLayer)   -,-        0             -                                         [LSTM layer 1 1 1 1]
+LSTM layer 1 1 2 (LSTM)          100,300    481,200       W:{100,1200}, RW:{300,1200}, b:{1,1200}   [Dropout layer 1]   
+Dropout layer 2 (DropoutLayer)   -,-        0             -                                         [LSTM layer 1 1 2]  
+LSTM layer 2 1 (LSTM)            300,200    400,800       W:{300,800}, RW:{200,800}, b:{1,800}      [Dropout layer 2]   
+Dropout layer (DropoutLayer)     -,-        0             -                                         [LSTM layer 2 1]    
+LSTM layer 1 2 (LSTM)            200,100    120,400       W:{200,400}, RW:{100,400}, b:{1,400}      [Dropout layer]     
+Output layer 2 (OutputLayer)     100,1      101           W:{100,1}, b:{1,1}                        [LSTM layer 1 2]    
+------------------------------------------------------------------------------------------------------------------------
+            Total Parameters:  1,053,301
+        Trainable Parameters:  1,053,301
+           Frozen Parameters:  0
+========================================================================================================================
+
+Attribute mappings:
+
+Model attributes      	    Incoming attributes
+----------------------	    ----------------
+(numeric) id          	--> 1 (numeric) id
+(numeric) setting1    	--> 3 (numeric) setting1
+(numeric) setting2    	--> 4 (numeric) setting2
+(numeric) setting3    	--> 5 (numeric) setting3
+(numeric) s1          	--> 6 (numeric) s1
+(numeric) s2          	--> 7 (numeric) s2
+(numeric) s3          	--> 8 (numeric) s3
+(numeric) s4          	--> 9 (numeric) s4
+(numeric) s5          	--> 10 (numeric) s5
+(numeric) s6          	--> 11 (numeric) s6
+(numeric) s7          	--> 12 (numeric) s7
+(numeric) s8          	--> 13 (numeric) s8
+(numeric) s9          	--> 14 (numeric) s9
+(numeric) s10         	--> 15 (numeric) s10
+(numeric) s11         	--> 16 (numeric) s11
+(numeric) s12         	--> 17 (numeric) s12
+(numeric) s13         	--> 18 (numeric) s13
+(numeric) s14         	--> 19 (numeric) s14
+(numeric) s15         	--> 20 (numeric) s15
+(numeric) s16         	--> 21 (numeric) s16
+(numeric) s17         	--> 22 (numeric) s17
+(numeric) s18         	--> 23 (numeric) s18
+(numeric) s19         	--> 24 (numeric) s19
+(numeric) s20         	--> 25 (numeric) s20
+(numeric) s21         	--> 26 (numeric) s21
+(numeric) RUL         	--> 27 (numeric) RUL
+(numeric) cycle_norm  	--> 28 (numeric) cycle_norm
+
+
+Time taken to build model: 20719.42 seconds
+
+=== Evaluation on test set ===
+
+Time taken to test model on supplied test set: 35.36 seconds
+
+=== Summary ===
+
+Correlation coefficient                  0     
+Mean absolute error                     54.0599
+Root mean squared error                 67.718 
+Relative absolute error                 99.8751 %
+Root relative squared error             99.8882 %
+Total Number of Instances            13096     
+
+
+
+
+LSTM removed cycles and higher earlystopping
+=== Run information ===
+
+Scheme:       weka.classifiers.misc.InputMappedClassifier -I -trim -W weka.classifiers.functions.Dl4jMlpClassifier -- -S 1 -cache-mode MEMORY -early-stopping "weka.dl4j.earlystopping.EarlyStopping -maxEpochsNoImprovement 15 -valPercentage 0.0" -normalization "Standardize training data" -iterator "weka.dl4j.iterators.instance.DefaultInstanceIterator -bs 1" -iteration-listener "weka.dl4j.listener.EpochListener -eval true -n 5" -layer "weka.dl4j.layers.LSTM -gateActivation \"weka.dl4j.activations.ActivationSigmoid \" -nOut 100 -activation \"weka.dl4j.activations.ActivationReLU \" -name \"LSTM layer 1 1 1 1\"" -layer "weka.dl4j.layers.DropoutLayer -dropout \"weka.dl4j.dropout.Dropout -p 0.2 -pSchedule \\\"weka.dl4j.schedules.ConstantSchedule -scheduleType EPOCH\\\"\" -nOut 0 -activation \"weka.dl4j.activations.ActivationReLU \" -name \"Dropout layer 1\"" -layer "weka.dl4j.layers.LSTM -gateActivation \"weka.dl4j.activations.ActivationSigmoid \" -nOut 300 -activation \"weka.dl4j.activations.ActivationReLU \" -name \"LSTM layer 1 1 2\"" -layer "weka.dl4j.layers.DropoutLayer -dropout \"weka.dl4j.dropout.Dropout -p 0.2 -pSchedule \\\"weka.dl4j.schedules.ConstantSchedule -scheduleType EPOCH\\\"\" -nOut 0 -activation \"weka.dl4j.activations.ActivationReLU \" -name \"Dropout layer 2\"" -layer "weka.dl4j.layers.LSTM -gateActivation \"weka.dl4j.activations.ActivationSigmoid \" -nOut 200 -activation \"weka.dl4j.activations.ActivationReLU \" -name \"LSTM layer 2 1\"" -layer "weka.dl4j.layers.DropoutLayer -dropout \"weka.dl4j.dropout.Dropout -p 0.2 -pSchedule \\\"weka.dl4j.schedules.ConstantSchedule -scheduleType EPOCH\\\"\" -nOut 0 -activation \"weka.dl4j.activations.ActivationReLU \" -name \"Dropout layer\"" -layer "weka.dl4j.layers.LSTM -gateActivation \"weka.dl4j.activations.ActivationSigmoid \" -nOut 100 -activation \"weka.dl4j.activations.ActivationReLU \" -name \"LSTM layer 1 2\"" -layer "weka.dl4j.layers.OutputLayer -lossFn \"weka.dl4j.lossfunctions.LossMSE \" -nOut 1 -activation \"weka.dl4j.activations.ActivationIdentity \" -name \"Output layer 2\"" -logConfig "weka.core.LogConfiguration -append true -dl4jLogLevel WARN -logFile C:\\Users\\User\\wekafiles\\wekaDeeplearning4j.log -nd4jLogLevel INFO -wekaDl4jLogLevel INFO" -config "weka.dl4j.NeuralNetConfiguration -biasInit 0.0 -biasUpdater \"weka.dl4j.updater.Sgd -lr 0.001 -lrSchedule \\\"weka.dl4j.schedules.ConstantSchedule -scheduleType EPOCH\\\"\" -dist \"weka.dl4j.distribution.Disabled \" -dropout \"weka.dl4j.dropout.Disabled \" -gradientNormalization None -gradNormThreshold 1.0 -l1 NaN -l2 NaN -minimize -algorithm STOCHASTIC_GRADIENT_DESCENT -updater \"weka.dl4j.updater.Adam -beta1MeanDecay 0.9 -beta2VarDecay 0.999 -epsilon 1.0E-8 -lr 0.001 -lrSchedule \\\"weka.dl4j.schedules.ConstantSchedule -scheduleType EPOCH\\\"\" -weightInit XAVIER -weightNoise \"weka.dl4j.weightnoise.Disabled \"" -numEpochs 100 -numGPUs 1 -averagingFrequency 10 -prefetchSize 24 -queueSize 0 -zooModel "weka.dl4j.zoo.CustomNet -channelsLast false -pretrained NONE"
+Relation:     normalizedtrain_FD001-weka.filters.unsupervised.attribute.Remove-R2
+Instances:    20631
+Attributes:   27
+              id
+              setting1
+              setting2
+              setting3
+              s1
+              s2
+              s3
+              s4
+              s5
+              s6
+              s7
+              s8
+              s9
+              s10
+              s11
+              s12
+              s13
+              s14
+              s15
+              s16
+              s17
+              s18
+              s19
+              s20
+              s21
+              RUL
+              cycle_norm
+Test mode:    user supplied test set:  size unknown (reading incrementally)
+
+=== Classifier model (full training set) ===
+
+InputMappedClassifier:
+
+Network Configuration: 
+NeuralNetConfiguration(weightInit=XAVIER, biasInit=0.0, dist=weka.dl4j.distribution.Disabled@66, l1=NaN, l2=NaN, dropout=Disabled(), updater=Updater(backend=Adam(learningRate=0.001, learningRateSchedule=ConstantSchedule.ConstantScheduleImpl(value=0.001), beta1=0.9, beta2=0.999, epsilon=1.0E-8), learningRateSchedule=ConstantSchedule(), learningRate=0.001), biasUpdater=Updater(backend=Sgd(learningRate=0.001, learningRateSchedule=ConstantSchedule.ConstantScheduleImpl(value=0.001)), learningRateSchedule=ConstantSchedule(), learningRate=0.001), miniBatch=true, seed=0, optimizationAlgo=STOCHASTIC_GRADIENT_DESCENT, useDropConnect=false, weightNoise=Disabled(), minimize=true, gradientNormalization=None, gradientNormalizationThreshold=1.0, inferenceWorkspaceMode=ENABLED, trainingWorkspaceMode=ENABLED)
+Model Summary: 
+
+========================================================================================================================
+VertexName (VertexType)          nIn,nOut   TotalParams   ParamsShape                               Vertex Inputs       
+========================================================================================================================
+input (InputVertex)              -,-        -             -                                         -                   
+LSTM layer 1 1 1 1 (LSTM)        26,100     50,800        W:{26,400}, RW:{100,400}, b:{1,400}       [input]             
+Dropout layer 1 (DropoutLayer)   -,-        0             -                                         [LSTM layer 1 1 1 1]
+LSTM layer 1 1 2 (LSTM)          100,300    481,200       W:{100,1200}, RW:{300,1200}, b:{1,1200}   [Dropout layer 1]   
+Dropout layer 2 (DropoutLayer)   -,-        0             -                                         [LSTM layer 1 1 2]  
+LSTM layer 2 1 (LSTM)            300,200    400,800       W:{300,800}, RW:{200,800}, b:{1,800}      [Dropout layer 2]   
+Dropout layer (DropoutLayer)     -,-        0             -                                         [LSTM layer 2 1]    
+LSTM layer 1 2 (LSTM)            200,100    120,400       W:{200,400}, RW:{100,400}, b:{1,400}      [Dropout layer]     
+Output layer 2 (OutputLayer)     100,1      101           W:{100,1}, b:{1,1}                        [LSTM layer 1 2]    
+------------------------------------------------------------------------------------------------------------------------
+            Total Parameters:  1,053,301
+        Trainable Parameters:  1,053,301
+           Frozen Parameters:  0
+========================================================================================================================
+
+Attribute mappings:
+
+Model attributes      	    Incoming attributes
+----------------------	    ----------------
+(numeric) id          	--> 1 (numeric) id
+(numeric) setting1    	--> 3 (numeric) setting1
+(numeric) setting2    	--> 4 (numeric) setting2
+(numeric) setting3    	--> 5 (numeric) setting3
+(numeric) s1          	--> 6 (numeric) s1
+(numeric) s2          	--> 7 (numeric) s2
+(numeric) s3          	--> 8 (numeric) s3
+(numeric) s4          	--> 9 (numeric) s4
+(numeric) s5          	--> 10 (numeric) s5
+(numeric) s6          	--> 11 (numeric) s6
+(numeric) s7          	--> 12 (numeric) s7
+(numeric) s8          	--> 13 (numeric) s8
+(numeric) s9          	--> 14 (numeric) s9
+(numeric) s10         	--> 15 (numeric) s10
+(numeric) s11         	--> 16 (numeric) s11
+(numeric) s12         	--> 17 (numeric) s12
+(numeric) s13         	--> 18 (numeric) s13
+(numeric) s14         	--> 19 (numeric) s14
+(numeric) s15         	--> 20 (numeric) s15
+(numeric) s16         	--> 21 (numeric) s16
+(numeric) s17         	--> 22 (numeric) s17
+(numeric) s18         	--> 23 (numeric) s18
+(numeric) s19         	--> 24 (numeric) s19
+(numeric) s20         	--> 25 (numeric) s20
+(numeric) s21         	--> 26 (numeric) s21
+(numeric) RUL         	--> 27 (numeric) RUL
+(numeric) cycle_norm  	--> 28 (numeric) cycle_norm
+
+
+Time taken to build model: 20559.34 seconds
+
+=== Evaluation on test set ===
+
+Time taken to test model on supplied test set: 32.55 seconds
+
+=== Summary ===
+
+Correlation coefficient                  0     
+Mean absolute error                     54.0599
+Root mean squared error                 67.718 
+Relative absolute error                 99.8751 %
+Root relative squared error             99.8882 %
+Total Number of Instances            13096     
+
+200 epochs removed cyclehh
+=== Run information ===
+
+Scheme:       weka.classifiers.misc.InputMappedClassifier -I -trim -W weka.classifiers.functions.Dl4jMlpClassifier -- -S 1 -cache-mode MEMORY -early-stopping "weka.dl4j.earlystopping.EarlyStopping -maxEpochsNoImprovement 15 -valPercentage 0.0" -normalization "Standardize training data" -iterator "weka.dl4j.iterators.instance.DefaultInstanceIterator -bs 1" -iteration-listener "weka.dl4j.listener.EpochListener -eval true -n 5" -layer "weka.dl4j.layers.LSTM -gateActivation \"weka.dl4j.activations.ActivationSigmoid \" -nOut 100 -activation \"weka.dl4j.activations.ActivationReLU \" -name \"LSTM layer 1 1 1 1\"" -layer "weka.dl4j.layers.DropoutLayer -dropout \"weka.dl4j.dropout.Dropout -p 0.2 -pSchedule \\\"weka.dl4j.schedules.ConstantSchedule -scheduleType EPOCH\\\"\" -nOut 0 -activation \"weka.dl4j.activations.ActivationReLU \" -name \"Dropout layer 1\"" -layer "weka.dl4j.layers.LSTM -gateActivation \"weka.dl4j.activations.ActivationSigmoid \" -nOut 300 -activation \"weka.dl4j.activations.ActivationReLU \" -name \"LSTM layer 1 1 2\"" -layer "weka.dl4j.layers.DropoutLayer -dropout \"weka.dl4j.dropout.Dropout -p 0.2 -pSchedule \\\"weka.dl4j.schedules.ConstantSchedule -scheduleType EPOCH\\\"\" -nOut 0 -activation \"weka.dl4j.activations.ActivationReLU \" -name \"Dropout layer 2\"" -layer "weka.dl4j.layers.LSTM -gateActivation \"weka.dl4j.activations.ActivationSigmoid \" -nOut 200 -activation \"weka.dl4j.activations.ActivationReLU \" -name \"LSTM layer 2 1\"" -layer "weka.dl4j.layers.DropoutLayer -dropout \"weka.dl4j.dropout.Dropout -p 0.2 -pSchedule \\\"weka.dl4j.schedules.ConstantSchedule -scheduleType EPOCH\\\"\" -nOut 0 -activation \"weka.dl4j.activations.ActivationReLU \" -name \"Dropout layer\"" -layer "weka.dl4j.layers.LSTM -gateActivation \"weka.dl4j.activations.ActivationSigmoid \" -nOut 100 -activation \"weka.dl4j.activations.ActivationReLU \" -name \"LSTM layer 1 2\"" -layer "weka.dl4j.layers.OutputLayer -lossFn \"weka.dl4j.lossfunctions.LossMSE \" -nOut 1 -activation \"weka.dl4j.activations.ActivationIdentity \" -name \"Output layer 2\"" -logConfig "weka.core.LogConfiguration -append true -dl4jLogLevel WARN -logFile C:\\Users\\User\\wekafiles\\wekaDeeplearning4j.log -nd4jLogLevel INFO -wekaDl4jLogLevel INFO" -config "weka.dl4j.NeuralNetConfiguration -biasInit 0.0 -biasUpdater \"weka.dl4j.updater.Sgd -lr 0.001 -lrSchedule \\\"weka.dl4j.schedules.ConstantSchedule -scheduleType EPOCH\\\"\" -dist \"weka.dl4j.distribution.Disabled \" -dropout \"weka.dl4j.dropout.Disabled \" -gradientNormalization None -gradNormThreshold 1.0 -l1 NaN -l2 NaN -minimize -algorithm STOCHASTIC_GRADIENT_DESCENT -updater \"weka.dl4j.updater.Adam -beta1MeanDecay 0.9 -beta2VarDecay 0.999 -epsilon 1.0E-8 -lr 0.001 -lrSchedule \\\"weka.dl4j.schedules.ConstantSchedule -scheduleType EPOCH\\\"\" -weightInit XAVIER -weightNoise \"weka.dl4j.weightnoise.Disabled \"" -numEpochs 200 -numGPUs 1 -averagingFrequency 10 -prefetchSize 24 -queueSize 0 -zooModel "weka.dl4j.zoo.CustomNet -channelsLast false -pretrained NONE"
+Relation:     normalizedtrain_FD001-weka.filters.unsupervised.attribute.Remove-R2
+Instances:    20631
+Attributes:   27
+              id
+              setting1
+              setting2
+              setting3
+              s1
+              s2
+              s3
+              s4
+              s5
+              s6
+              s7
+              s8
+              s9
+              s10
+              s11
+              s12
+              s13
+              s14
+              s15
+              s16
+              s17
+              s18
+              s19
+              s20
+              s21
+              RUL
+              cycle_norm
+Test mode:    user supplied test set:  size unknown (reading incrementally)
+
+LSTM FD001 removed cycle with dropout 200 epochs 15 patience
+
+=== Classifier model (full training set) ===
+
+InputMappedClassifier:
+
+Network Configuration: 
+NeuralNetConfiguration(weightInit=XAVIER, biasInit=0.0, dist=weka.dl4j.distribution.Disabled@66, l1=NaN, l2=NaN, dropout=Disabled(), updater=Updater(backend=Adam(learningRate=0.001, learningRateSchedule=ConstantSchedule.ConstantScheduleImpl(value=0.001), beta1=0.9, beta2=0.999, epsilon=1.0E-8), learningRateSchedule=ConstantSchedule(), learningRate=0.001), biasUpdater=Updater(backend=Sgd(learningRate=0.001, learningRateSchedule=ConstantSchedule.ConstantScheduleImpl(value=0.001)), learningRateSchedule=ConstantSchedule(), learningRate=0.001), miniBatch=true, seed=0, optimizationAlgo=STOCHASTIC_GRADIENT_DESCENT, useDropConnect=false, weightNoise=Disabled(), minimize=true, gradientNormalization=None, gradientNormalizationThreshold=1.0, inferenceWorkspaceMode=ENABLED, trainingWorkspaceMode=ENABLED)
+Model Summary: 
+
+========================================================================================================================
+VertexName (VertexType)          nIn,nOut   TotalParams   ParamsShape                               Vertex Inputs       
+========================================================================================================================
+input (InputVertex)              -,-        -             -                                         -                   
+LSTM layer 1 1 1 1 (LSTM)        26,100     50,800        W:{26,400}, RW:{100,400}, b:{1,400}       [input]             
+Dropout layer 1 (DropoutLayer)   -,-        0             -                                         [LSTM layer 1 1 1 1]
+LSTM layer 1 1 2 (LSTM)          100,300    481,200       W:{100,1200}, RW:{300,1200}, b:{1,1200}   [Dropout layer 1]   
+Dropout layer 2 (DropoutLayer)   -,-        0             -                                         [LSTM layer 1 1 2]  
+LSTM layer 2 1 (LSTM)            300,200    400,800       W:{300,800}, RW:{200,800}, b:{1,800}      [Dropout layer 2]   
+Dropout layer (DropoutLayer)     -,-        0             -                                         [LSTM layer 2 1]    
+LSTM layer 1 2 (LSTM)            200,100    120,400       W:{200,400}, RW:{100,400}, b:{1,400}      [Dropout layer]     
+Output layer 2 (OutputLayer)     100,1      101           W:{100,1}, b:{1,1}                        [LSTM layer 1 2]    
+------------------------------------------------------------------------------------------------------------------------
+            Total Parameters:  1,053,301
+        Trainable Parameters:  1,053,301
+           Frozen Parameters:  0
+========================================================================================================================
+
+Attribute mappings:
+
+Model attributes      	    Incoming attributes
+----------------------	    ----------------
+(numeric) id          	--> 1 (numeric) id
+(numeric) setting1    	--> 3 (numeric) setting1
+(numeric) setting2    	--> 4 (numeric) setting2
+(numeric) setting3    	--> 5 (numeric) setting3
+(numeric) s1          	--> 6 (numeric) s1
+(numeric) s2          	--> 7 (numeric) s2
+(numeric) s3          	--> 8 (numeric) s3
+(numeric) s4          	--> 9 (numeric) s4
+(numeric) s5          	--> 10 (numeric) s5
+(numeric) s6          	--> 11 (numeric) s6
+(numeric) s7          	--> 12 (numeric) s7
+(numeric) s8          	--> 13 (numeric) s8
+(numeric) s9          	--> 14 (numeric) s9
+(numeric) s10         	--> 15 (numeric) s10
+(numeric) s11         	--> 16 (numeric) s11
+(numeric) s12         	--> 17 (numeric) s12
+(numeric) s13         	--> 18 (numeric) s13
+(numeric) s14         	--> 19 (numeric) s14
+(numeric) s15         	--> 20 (numeric) s15
+(numeric) s16         	--> 21 (numeric) s16
+(numeric) s17         	--> 22 (numeric) s17
+(numeric) s18         	--> 23 (numeric) s18
+(numeric) s19         	--> 24 (numeric) s19
+(numeric) s20         	--> 25 (numeric) s20
+(numeric) s21         	--> 26 (numeric) s21
+(numeric) RUL         	--> 27 (numeric) RUL
+(numeric) cycle_norm  	--> 28 (numeric) cycle_norm
+
+
+Time taken to build model: 36372.31 seconds
+
+=== Evaluation on test set ===
+
+Time taken to test model on supplied test set: 32.63 seconds
+
+=== Summary ===
+
+Correlation coefficient                  0     
+Mean absolute error                     54.0599
+Root mean squared error                 67.718 
+Relative absolute error                 99.8751 %
+Root relative squared error             99.8882 %
+Total Number of Instances            13096     
+
+
+
+
+
+FD001 Linear Regression
+
+=== Run information ===
+
+Scheme:       weka.classifiers.misc.InputMappedClassifier -I -trim -W weka.classifiers.functions.LinearRegression -- -S 0 -R 1.0E-8 -num-decimal-places 4
+Relation:     normalizedtrain_FD001-weka.filters.unsupervised.attribute.Remove-R2
+Instances:    20631
+Attributes:   27
+              id
+              setting1
+              setting2
+              setting3
+              s1
+              s2
+              s3
+              s4
+              s5
+              s6
+              s7
+              s8
+              s9
+              s10
+              s11
+              s12
+              s13
+              s14
+              s15
+              s16
+              s17
+              s18
+              s19
+              s20
+              s21
+              RUL
+              cycle_norm
+Test mode:    user supplied test set:  size unknown (reading incrementally)
+
+=== Classifier model (full training set) ===
+
+InputMappedClassifier:
+
+
+Linear Regression Model
+
+RUL =
+
+      0.2841 * id +
+      1.6128 * setting2 +
+     -8.367  * s2 +
+     -5.9535 * s3 +
+    -13.4147 * s4 +
+     -3.0432 * s6 +
+     13.3108 * s7 +
+     -8.6709 * s8 +
+    -17.5771 * s9 +
+    -19.4966 * s11 +
+     13.3196 * s12 +
+     -7.1811 * s13 +
+     -9.692  * s14 +
+    -10.376  * s15 +
+     -5.5567 * s17 +
+      6.0332 * s20 +
+      8.2703 * s21 +
+    -75.6257 * cycle_norm +
+     30.139 
+Attribute mappings:
+
+Model attributes      	    Incoming attributes
+----------------------	    ----------------
+(numeric) id          	--> 1 (numeric) id
+(numeric) setting1    	--> 3 (numeric) setting1
+(numeric) setting2    	--> 4 (numeric) setting2
+(numeric) setting3    	--> 5 (numeric) setting3
+(numeric) s1          	--> 6 (numeric) s1
+(numeric) s2          	--> 7 (numeric) s2
+(numeric) s3          	--> 8 (numeric) s3
+(numeric) s4          	--> 9 (numeric) s4
+(numeric) s5          	--> 10 (numeric) s5
+(numeric) s6          	--> 11 (numeric) s6
+(numeric) s7          	--> 12 (numeric) s7
+(numeric) s8          	--> 13 (numeric) s8
+(numeric) s9          	--> 14 (numeric) s9
+(numeric) s10         	--> 15 (numeric) s10
+(numeric) s11         	--> 16 (numeric) s11
+(numeric) s12         	--> 17 (numeric) s12
+(numeric) s13         	--> 18 (numeric) s13
+(numeric) s14         	--> 19 (numeric) s14
+(numeric) s15         	--> 20 (numeric) s15
+(numeric) s16         	--> 21 (numeric) s16
+(numeric) s17         	--> 22 (numeric) s17
+(numeric) s18         	--> 23 (numeric) s18
+(numeric) s19         	--> 24 (numeric) s19
+(numeric) s20         	--> 25 (numeric) s20
+(numeric) s21         	--> 26 (numeric) s21
+(numeric) RUL         	--> 27 (numeric) RUL
+(numeric) cycle_norm  	--> 28 (numeric) cycle_norm
+
+
+Time taken to build model: 0.22 seconds
+
+=== Evaluation on test set ===
+
+Time taken to test model on supplied test set: 0.22 seconds
+
+=== Summary ===
+
+Correlation coefficient                  0.6826
+Mean absolute error                     33.9592
+Root mean squared error                 43.2893
+Relative absolute error                 62.7392 %
+Root relative squared error             63.8545 %
+Total Number of Instances            13096     
+
+FD002 linear Regression
+=== Run information ===
+
+Scheme:       weka.classifiers.misc.InputMappedClassifier -I -trim -W weka.classifiers.functions.LinearRegression -- -S 0 -R 1.0E-8 -num-decimal-places 4
+Relation:     normalizedtrain_FD002-weka.filters.unsupervised.attribute.Remove-R2
+Instances:    53759
+Attributes:   27
+              id
+              setting1
+              setting2
+              setting3
+              s1
+              s2
+              s3
+              s4
+              s5
+              s6
+              s7
+              s8
+              s9
+              s10
+              s11
+              s12
+              s13
+              s14
+              s15
+              s16
+              s17
+              s18
+              s19
+              s20
+              s21
+              RUL
+              cycle_norm
+Test mode:    user supplied test set:  size unknown (reading incrementally)
+
+=== Classifier model (full training set) ===
+
+InputMappedClassifier:
+
+
+Linear Regression Model
+
+RUL =
+
+      0.0269 * id +
+    -22.0295 * setting1 +
+     12.7493 * setting3 +
+    -61.1297 * s3 +
+     -9.5072 * s10 +
+     43.1079 * s14 +
+    -12.1569 * s16 +
+    -54.993  * s17 +
+     12.7075 * s19 +
+     60.914  * s20 +
+     11.5577 * s21 +
+   -133.9823 * cycle_norm +
+     39.808 
+Attribute mappings:
+
+Model attributes      	    Incoming attributes
+----------------------	    ----------------
+(numeric) id          	--> 1 (numeric) id
+(numeric) setting1    	--> 3 (numeric) setting1
+(numeric) setting2    	--> 4 (numeric) setting2
+(numeric) setting3    	--> 5 (numeric) setting3
+(numeric) s1          	--> 6 (numeric) s1
+(numeric) s2          	--> 7 (numeric) s2
+(numeric) s3          	--> 8 (numeric) s3
+(numeric) s4          	--> 9 (numeric) s4
+(numeric) s5          	--> 10 (numeric) s5
+(numeric) s6          	--> 11 (numeric) s6
+(numeric) s7          	--> 12 (numeric) s7
+(numeric) s8          	--> 13 (numeric) s8
+(numeric) s9          	--> 14 (numeric) s9
+(numeric) s10         	--> 15 (numeric) s10
+(numeric) s11         	--> 16 (numeric) s11
+(numeric) s12         	--> 17 (numeric) s12
+(numeric) s13         	--> 18 (numeric) s13
+(numeric) s14         	--> 19 (numeric) s14
+(numeric) s15         	--> 20 (numeric) s15
+(numeric) s16         	--> 21 (numeric) s16
+(numeric) s17         	--> 22 (numeric) s17
+(numeric) s18         	--> 23 (numeric) s18
+(numeric) s19         	--> 24 (numeric) s19
+(numeric) s20         	--> 25 (numeric) s20
+(numeric) s21         	--> 26 (numeric) s21
+(numeric) RUL         	--> 27 (numeric) RUL
+(numeric) cycle_norm  	--> 28 (numeric) cycle_norm
+
+
+Time taken to build model: 0.29 seconds
+
+=== Evaluation on test set ===
+
+Time taken to test model on supplied test set: 0.49 seconds
+
+=== Summary ===
+
+Correlation coefficient                  0.6535
+Mean absolute error                     40.2655
+Root mean squared error                 50.6569
+Relative absolute error                 68.6418 %
+Root relative squared error             69.1787 %
+Total Number of Instances            33991     
+
+FD003 Linear Regression
+=== Run information ===
+
+Scheme:       weka.classifiers.misc.InputMappedClassifier -I -trim -W weka.classifiers.functions.LinearRegression -- -S 0 -R 1.0E-8 -num-decimal-places 4
+Relation:     normalizedtrain_FD003-weka.filters.unsupervised.attribute.Remove-R2
+Instances:    24720
+Attributes:   27
+              id
+              setting1
+              setting2
+              setting3
+              s1
+              s2
+              s3
+              s4
+              s5
+              s6
+              s7
+              s8
+              s9
+              s10
+              s11
+              s12
+              s13
+              s14
+              s15
+              s16
+              s17
+              s18
+              s19
+              s20
+              s21
+              RUL
+              cycle_norm
+Test mode:    user supplied test set:  size unknown (reading incrementally)
+
+=== Classifier model (full training set) ===
+
+InputMappedClassifier:
+
+
+Linear Regression Model
+
+RUL =
+
+     -0.2377 * id +
+    -16.7482 * s2 +
+    -18.8768 * s3 +
+    -22.3032 * s4 +
+    -42.046  * s6 +
+    -66.523  * s8 +
+    -34.076  * s9 +
+      7.0971 * s10 +
+    -33.4961 * s11 +
+     10.0965 * s12 +
+    -89.8546 * s13 +
+    -30.8278 * s14 +
+     -8.4072 * s15 +
+    -16.3953 * s17 +
+     15.9143 * s20 +
+     16.6062 * s21 +
+    -73.8266 * cycle_norm +
+    162.4309
+Attribute mappings:
+
+Model attributes      	    Incoming attributes
+----------------------	    ----------------
+(numeric) id          	--> 1 (numeric) id
+(numeric) setting1    	--> 3 (numeric) setting1
+(numeric) setting2    	--> 4 (numeric) setting2
+(numeric) setting3    	--> 5 (numeric) setting3
+(numeric) s1          	--> 6 (numeric) s1
+(numeric) s2          	--> 7 (numeric) s2
+(numeric) s3          	--> 8 (numeric) s3
+(numeric) s4          	--> 9 (numeric) s4
+(numeric) s5          	--> 10 (numeric) s5
+(numeric) s6          	--> 11 (numeric) s6
+(numeric) s7          	--> 12 (numeric) s7
+(numeric) s8          	--> 13 (numeric) s8
+(numeric) s9          	--> 14 (numeric) s9
+(numeric) s10         	--> 15 (numeric) s10
+(numeric) s11         	--> 16 (numeric) s11
+(numeric) s12         	--> 17 (numeric) s12
+(numeric) s13         	--> 18 (numeric) s13
+(numeric) s14         	--> 19 (numeric) s14
+(numeric) s15         	--> 20 (numeric) s15
+(numeric) s16         	--> 21 (numeric) s16
+(numeric) s17         	--> 22 (numeric) s17
+(numeric) s18         	--> 23 (numeric) s18
+(numeric) s19         	--> 24 (numeric) s19
+(numeric) s20         	--> 25 (numeric) s20
+(numeric) s21         	--> 26 (numeric) s21
+(numeric) RUL         	--> 27 (numeric) RUL
+(numeric) cycle_norm  	--> 28 (numeric) cycle_norm
+
+
+Time taken to build model: 0.04 seconds
+
+=== Evaluation on test set ===
+
+Time taken to test model on supplied test set: 0.28 seconds
+
+=== Summary ===
+
+Correlation coefficient                  0.5959
+Mean absolute error                     50.8804
+Root mean squared error                 68.3764
+Relative absolute error                 76.8271 %
+Root relative squared error             75.9502 %
+Total Number of Instances            16596     
+
+FD004 Linear Regression
+=== Run information ===
+
+Scheme:       weka.classifiers.misc.InputMappedClassifier -I -trim -W weka.classifiers.functions.LinearRegression -- -S 0 -R 1.0E-8 -num-decimal-places 4
+Relation:     normalizedtrain_FD004-weka.filters.unsupervised.attribute.Remove-R2
+Instances:    61249
+Attributes:   27
+              id
+              setting1
+              setting2
+              setting3
+              s1
+              s2
+              s3
+              s4
+              s5
+              s6
+              s7
+              s8
+              s9
+              s10
+              s11
+              s12
+              s13
+              s14
+              s15
+              s16
+              s17
+              s18
+              s19
+              s20
+              s21
+              RUL
+              cycle_norm
+Test mode:    user supplied test set:  size unknown (reading incrementally)
+
+=== Classifier model (full training set) ===
+
+InputMappedClassifier:
+
+
+Linear Regression Model
+
+RUL =
+
+    -34.2215 * setting1 +
+    -51.1508 * setting2 +
+     88.9096 * setting3 +
+   -115.0867 * s3 +
+   -126.9236 * s14 +
+    -19.1724 * s16 +
+   -180.1938 * s17 +
+     88.9624 * s19 +
+     93.5316 * s20 +
+     61.0186 * s21 +
+   -135.8025 * cycle_norm +
+     -8.6995
+Attribute mappings:
+
+Model attributes      	    Incoming attributes
+----------------------	    ----------------
+(numeric) id          	--> 1 (numeric) id
+(numeric) setting1    	--> 3 (numeric) setting1
+(numeric) setting2    	--> 4 (numeric) setting2
+(numeric) setting3    	--> 5 (numeric) setting3
+(numeric) s1          	--> 6 (numeric) s1
+(numeric) s2          	--> 7 (numeric) s2
+(numeric) s3          	--> 8 (numeric) s3
+(numeric) s4          	--> 9 (numeric) s4
+(numeric) s5          	--> 10 (numeric) s5
+(numeric) s6          	--> 11 (numeric) s6
+(numeric) s7          	--> 12 (numeric) s7
+(numeric) s8          	--> 13 (numeric) s8
+(numeric) s9          	--> 14 (numeric) s9
+(numeric) s10         	--> 15 (numeric) s10
+(numeric) s11         	--> 16 (numeric) s11
+(numeric) s12         	--> 17 (numeric) s12
+(numeric) s13         	--> 18 (numeric) s13
+(numeric) s14         	--> 19 (numeric) s14
+(numeric) s15         	--> 20 (numeric) s15
+(numeric) s16         	--> 21 (numeric) s16
+(numeric) s17         	--> 22 (numeric) s17
+(numeric) s18         	--> 23 (numeric) s18
+(numeric) s19         	--> 24 (numeric) s19
+(numeric) s20         	--> 25 (numeric) s20
+(numeric) s21         	--> 26 (numeric) s21
+(numeric) RUL         	--> 27 (numeric) RUL
+(numeric) cycle_norm  	--> 28 (numeric) cycle_norm
+
+
+Time taken to build model: 0.26 seconds
+
+=== Evaluation on test set ===
+
+Time taken to test model on supplied test set: 0.59 seconds
+
+=== Summary ===
+
+Correlation coefficient                  0.44  
+Mean absolute error                     66.2592
+Root mean squared error                 87.9186
+Relative absolute error                 84.4887 %
+Root relative squared error             84.3823 %
+Total Number of Instances            41214     
+
+
+
